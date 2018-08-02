@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+  <head>
+      {% load static %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Plast'if</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{%  static  'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/connect.css' %}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+
+  </head>
+
+
+  <body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-light fixed-top navbar-shrink" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="#page-top">Plast'<b>if</b></a>
+          <span>
+            <a href='/ux/'><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-arrow-left"></i>
+              Précédent
+            </button></a>
+          </span>
+      </div>
+    </nav>
+
+
+
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <form id="formSelect" action="#">
+                <select id="select-bar" class="js-example-basic-multiple">
+                    {% for company in  companies %}
+                        <option value={{ company.id }}>{{ company.name }}</option>
+                    {% endfor %}
+                </select>
+            <input class="btn btn-primary" type="submit" value="C'est moi !">
+            </form>
+        <div class="container">
+            <hr class="star-primary">
+            <h2 class="text-center">Sélectionne ta team</h2>
+        </div>
+
+    </section>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src='{% static 'vendor/jquery/jquery.min.js' %}'></script>
+    <script src='{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
+
+    <!-- Plugin JavaScript -->
+    <script src='{% static "vendor/jquery-easing/jquery.easing.min.js" %}'></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src='{% static "js/jqBootstrapValidation.js"%}'></script>
+    <script src='{% static "js/contact_me.js" %}'></script>
+
+    <!-- Custom scripts for this template -->
+    <script src= '{% static "js/freelancer.js" %}'></script>
+    <script src= "{% static 'js/transformTeamModal.js' %}"></script>
+    <script src= "{% static "vendor/bootstrap/js/typeahead.bundle.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+        });
+
+    </script>
+    <script type="text/javascript">
+        var formSelect = $('#formSelect');
+        //var value = select.options[select.selectedIndex].value;
+        formSelect.submit(function(event){
+            event.preventDefault();
+            var select = $('#select-bar');
+            var value = select.val();
+            console.log(value);
+            var baseUrl ='{{ base_url | safe }}';
+            var destinationUrl = baseUrl + value ;
+            console.log(value);
+            console.log(destinationUrl);
+            window.location.href=destinationUrl;
+        });
+
+    </script>
+
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        // Defining the local dataset
+        var cars = {{ companies_list |safe }};
+        console.log(cars);
+        var company = cars;
+        console.log(company);
+        // Constructing the suggestion engine
+        var company = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.whitespace,
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            local: cars
+        });
+
+        // Initializing the typeahead
+        $('.typeahead').typeahead({
+            hint: true,
+            highlight: true, /* Enable substring highlighting */
+            minLength: 1 /* Specify minimum characters required for showing suggestions */
+        },
+        {
+            name: 'company',
+            source: company
+        });
+    });
+    </script>
+
+
+  </body>
+
+</html>

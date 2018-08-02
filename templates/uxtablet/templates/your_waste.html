@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      {% load static %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Plast'if</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{%  static  'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/yourwaste.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light fixed-top navbar-shrink" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="#page-top">Plast'<b>if</b></a>
+          <span>
+            <a href="/ux/connect/"><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-arrow-left"></i>
+              Précédent
+            </button></a>
+            <a href='/ux/'><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fa fa-home"></i>
+                Accueil
+            </button></a>
+          </span>
+      </div>
+    </nav>
+
+        <!-- Modal -->
+    <div class="modal fade" id="validationModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Mmmh</h4>
+            <button type="button" class="close" data-dismiss="modal" id = "modalCross">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Yeah, tu viens de gagner 500 paillettes !</p>
+          </div>
+          <div class="modal-footer">
+            <a href="{{ next_url }}">
+                <button type="button" class="btn btn-primary" id= "modalButton">Hourra !</button>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+      <div class="container">
+        <h2 class="text-center">Insère ton déchet</h2>
+          <hr class="star-primary">
+      </div>
+        <div class="container">
+            <div class="team-img-container">
+                <img class="img-fluid team-img" alt="logo" src={{ waste.image }}>
+            </div>
+        </div>
+        <h4>Yihaa en recyclant ce déchet tu vas gagner {{ waste.points }} paillettes !</h4>
+        <div class="container" id="description">{{ waste.description }}</div>
+        <div class="container" id="button-container">
+            <a href="{% url 'ux:print_some_love' user_id plastic_id %}">
+                <button type="button" class="btn btn-primary" id="validation-button">C'est fait !</button>
+            </a>
+        </div>
+    </section>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src='{% static 'vendor/jquery/jquery.min.js' %}'></script>
+    <script src='{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
+
+    <!-- Plugin JavaScript -->
+    <script src='{% static "vendor/jquery-easing/jquery.easing.min.js" %}'></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src='{% static "js/jqBootstrapValidation.js"%}'></script>
+    <script src='{% static "js/contact_me.js" %}'></script>
+
+    <!-- Custom scripts for this template -->
+    <script src= '{% static "js/freelancer.js" %}'></script>
+
+    <script src= '{% static "js/transformPlasticModal.js" %}'></script>
+
+  </body>
+
+</html>
